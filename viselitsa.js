@@ -31,6 +31,12 @@ var words=[             //СОЗДАЛИ МАССИВ СО СЛОВАМИ
     'оладушек',
     'апельсин',
     'корица',
+    'кухня',
+    'телефон',
+    'штора',
+    'мама',
+    'контакт',
+    'ковер',
     'котик'
 ]
 
@@ -53,22 +59,29 @@ var remainingLetters=word.length            //ОСТАВШИЕСЯ БУКВЫ
 //     ОБНОВЛЯЕМ answerArr и remainingLetters ДЛЯ КАЖДОГО ВХОЖДЕНИЯ УГАДАННОЙ БУКВЫ
 // }
 
+var attempts=100                    // ДОБАВИЛИ КОЛИЧЕСТВО ПОПЫТОК
 
-while(remainingLetters>0){
+
+while(remainingLetters>0 && attempts>0){
     
     alert(answerArr.join(''))
-    var quess=prompt('угадай букву или тык "отмена" ')
+    var quess=prompt('угадай букву или тык "отмена" ,осталось попыток: '+attempts).toLowerCase()
     if(quess==null){
         break               //ПРОПИСАЛИ УСЛОВИЕ ДЛЯ ВЫХОДА ИЗ ИГРЫ
     }else if( quess.length!==1){
         alert('для ввода допускается не больше одной буквы')               //ПРОПИСАЛИ УСЛОВИЕ ДЛЯ НЕДОПУЩЕНИЯ ВВОДА БОЛЕЕ ОДНОГО СИМВОЛА
     }else{
         for(let j=0;j<word.length;j++){
-            if(word[j]===quess){
+            if(quess==answerArr[j]){               //ДОБАВИЛИ УСЛОВИЕ В СЛУЧАЕ ПОВТОРНОГО ВВОДА 
+                alert('ты уже вводил эту букву')
+                remainingLetters++
+            }
+            if(word[j]===quess){                //ПРОПИСАЛИ УСЛОВИЕ В СЛУЧАЕ ПРАВИЛЬНОГО ВВОДА
                 answerArr[j]=quess
                 remainingLetters--
-            }
-        }
+            }}
+        
     }
+    attempts--
 }
-alert('Ура ты отгадал слово '+ answerArr.join +'!!!')
+alert('Ура ты отгадал слово '+ answerArr.join('') +'!!!')
