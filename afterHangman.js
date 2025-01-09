@@ -119,18 +119,95 @@
 // add(multiply(36325,9824),777)
 
 //2
-function areArrSame(a,b){
-    if(a.length!==b.length){
-        return  false
+// function areArrSame(a,b){
+//     if(a.length!==b.length){
+//         return  false
         
-    }
-    for(let i=0;i<a.length;i++){
-    if(a[i]===b[i]){
-        return true
-    }
-    return false
-}}
+//     }
+//     for(let i=0;i<a.length;i++){
+//     if(a[i]===b[i]){
+//         return true
+//     }
+//     return false
+// }}
 
-alert(areArrSame([1,2,3],[5,2,3]))
-alert(areArrSame([1,2,3],[1,2,3]))
-alert(areArrSame([1,2,3],[1,2,3,4]))
+// alert(areArrSame([1,2,3],[5,2,3]))
+// alert(areArrSame([1,2,3],[1,2,3]))
+// alert(areArrSame([1,2,3],[1,2,3,4]))
+
+
+//3
+var pickWord=function(){
+    var words=[             //СОЗДАЛИ МАССИВ СО СЛОВАМИ
+        'оладушек',
+        'апельсин',
+        'корица',
+        'кухня',
+        'телефон',
+        'штора',
+        'мама',
+        'контакт',
+        'ковер',
+        'котик'
+    ]
+    return word=words[Math.floor(Math.random()*words.length)] 
+}
+
+var setupAnswerArr=function(word){
+    var answerArr=[]            
+for(let i=0;i<word.length;i++){
+    answerArr[i]='_ ';          
+    
+}
+    return answerArr
+}
+
+var showProgress=function(answerArr){
+    alert(answerArr.join(''))
+
+}
+
+var getQuess=function(){
+    return prompt('угадай букву или тык "отмена" ,осталось попыток: ').toLowerCase()
+
+}
+
+var updateFameState=function(quess,word,answerArr){
+    var ost=0
+    for(let j=0;j<word.length;j++){
+        if(word[j]===quess){                //ПРОПИСАЛИ УСЛОВИЕ В СЛУЧАЕ ПРАВИЛЬНОГО ВВОДА
+            answerArr[j]=quess
+            ost++
+            
+        }}
+        return ost
+}
+
+var showCongratulate=function(){
+    return alert('Ура,ты смог отгадать слово '+ answerArr.join('')+' !!!')
+}
+
+
+
+
+
+var word=pickWord()
+var answerArr=setupAnswerArr(word)
+
+var remainingLetters=word.length
+while(remainingLetters>0){
+    showProgress(answerArr)
+    
+    var quess=getQuess()
+    if(quess===null){
+        break
+    }else if(quess.length!==1){
+        alert('только один символ')
+    }else{
+        var correctQuesses=updateFameState(quess,word,answerArr)
+        remainingLetters-=correctQuesses
+    }
+}
+showCongratulate(answerArr)
+
+
